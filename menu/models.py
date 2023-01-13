@@ -3,8 +3,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from main.models import TimestampModel
 
 class MenuSections(models.TextChoices):
-        STARTERS = 'S'
-        ENTREES = 'E'
+        APPETIZERS = 'A'
+        MAINS = 'M'
         DESERTS = 'D'
 
 class DietOptions(models.TextChoices):
