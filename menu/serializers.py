@@ -50,6 +50,7 @@ class UpdateMenuItemSerializer(serializers.ModelSerializer):
 
 
 class MenuSerializer(serializers.ModelSerializer):
+    items = serializers.SerializerMethodField()
     class Meta:
         model = Menu
         fields = [
@@ -60,6 +61,11 @@ class MenuSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at'
             ]
+
+    def get_items(self, obj):
+        items = obj.items.all()
+        serializer = MenuItemSerializer(items, many=True)
+        return serializer.data
 
 class CreateMenuSerializer(serializers.ModelSerializer):
     class Meta:
@@ -73,4 +79,4 @@ class UpdateMenuSerializer(serializers.ModelSerializer):
 
     name = serializers.CharField(allow_blank=False, default=None)
     description = serializers.CharField(allow_blank=False, default=None)
-    items = MenuItemSerializer(read_only=True, many=True)
+    items = MenuItemSerializer(many=True)

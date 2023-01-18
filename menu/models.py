@@ -26,7 +26,13 @@ class MenuItem(TimestampModel):
         ]
     )
 
+    def __str__(self):
+        return self.name
+
 class Menu(TimestampModel):
     name = models.CharField(max_length=20, unique=True)
     description = models.CharField(max_length=254)
     items = models.ManyToManyField(MenuItem, blank=True)
+
+    def __str__(self):
+        return self.name
